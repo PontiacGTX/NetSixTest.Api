@@ -30,6 +30,7 @@ namespace NetSixTest.DataAccess.Command
                 if (producto is null) return null;
                 producto.Price = command.Field.Price;
                 producto.Name = command.Field.Name;
+                producto.Enabled = command.Field.Enabled;
                 producto.Quantity = command.Field.Quantity;
                 producto.CategoryId = command.Field.CategoryId;
                 await _ctx.SaveChangesAsync();
