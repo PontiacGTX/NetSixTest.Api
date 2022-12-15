@@ -48,6 +48,7 @@ if (app.Environment.IsDevelopment())
 using var scope = app.Services.CreateScope();
 using (AppDbContext ctx = scope.ServiceProvider.GetRequiredService<AppDbContext>())
 {
+    
     await ctx.Database.EnsureCreatedAsync();
     await ctx.Database.MigrateAsync();
 }

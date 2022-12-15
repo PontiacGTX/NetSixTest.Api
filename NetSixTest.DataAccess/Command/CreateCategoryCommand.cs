@@ -26,6 +26,7 @@ namespace NetSixTest.DataAccess.Command
                 Category inventarioItem = new();
                 inventarioItem.Id = request.Field.Id;
                 inventarioItem.Name = request.Field.Name;
+                inventarioItem.Enabled = request.Field.Enabled;
                 var entry = _ctx.Categories.Add(inventarioItem);
                 await _ctx.SaveChangesAsync();
                 return entry.Entity!;

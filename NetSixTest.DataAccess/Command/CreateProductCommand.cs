@@ -28,6 +28,7 @@ public class CreateProductCommand : IPropertyFieldHolder<Product>, IRequest<Prod
             Product inventarioItem = new();
             inventarioItem.Id = request.Field.Id;
             inventarioItem.Name = request.Field.Name;
+            inventarioItem.CategoryId = request.Field.CategoryId;
             inventarioItem.Price = request.Field.Price;
             inventarioItem.Quantity =request.Field.Quantity;
             var entry = _ctx.Products.Add(inventarioItem);
