@@ -24,7 +24,7 @@ namespace NetSixTest.DataAccess.Request
             public async Task<IList<Product>> Handle(ProductListRequest request, CancellationToken cancellationToken)
             {
                 
-                var productos = await _ctx.Products.Select(x=>x).ToListAsync();
+                var productos = await _ctx.Products.Include(x=>x.Category).Select(x=>x).ToListAsync();
                 return productos;
             }
         }
