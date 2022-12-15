@@ -8,13 +8,19 @@ using NetSixTest.Data.Models;
 using NetSixTest.Services.Services;
 using NetSixTest.Services.Validation;
 using System.Reflection;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddControllers().AddFluentValidation(options =>
+builder.Services.AddControllers().AddJsonOptions(o =>
+{
+    o.JsonSerializerOptions.ReferenceHandler  = ReferenceHandler.IgnoreCycles;
+    o.JsonSerializerOptions.WriteIndented = true;
+}).AddFluentValidation(options =>
 {
     
     options.ImplicitlyValidateChildProperties = true;
