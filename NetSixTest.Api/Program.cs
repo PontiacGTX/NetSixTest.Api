@@ -58,7 +58,7 @@ using (AppDbContext ctx = scope.ServiceProvider.GetRequiredService<AppDbContext>
     await ctx.Database.EnsureCreatedAsync();
     await ctx.Database.MigrateAsync();
 }
-
+app.UseCors(option => option.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

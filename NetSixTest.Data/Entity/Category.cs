@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace NetSixTest.Data.Entity
@@ -27,6 +28,7 @@ namespace NetSixTest.Data.Entity
         public int Id { get; set; }
         public string Name { get; set; }
         public bool Enabled { get; set; }
+        [JsonIgnore]
         public List<Product> Products { get; set; }
     }
 }
