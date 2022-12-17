@@ -1,0 +1,36 @@
+table {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    min-width: 500px;
+  }
+  th.mat-header-cell {
+    text-align: center !important;
+    padding: 16.5px;
+    max-width: 300px;
+  }
+  td.mat-cell {
+    text-align: center !important;
+    white-space: break-spaces;
+    padding: 15px;
+    max-width: 300px;
+  }
+  #productNameHeader{
+    margin-right:4%;
+  }
+  #productName{
+    word-wrap: break-word;
+    text-align:center;
+    width: min-content;
+    white-space: break-space;
+  }
+  #btnCreate
+  {
+    margin: 50px;
+   float:right;
+  }
+  .btn-act{
+    width:min-content;
+    height:29px;
+    padding-top:-10px;
+  }

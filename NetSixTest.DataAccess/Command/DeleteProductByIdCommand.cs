@@ -25,7 +25,7 @@ namespace NetSixTest.DataAccess.Command
             {
                 var product = await _ctx.Products.FirstOrDefaultAsync(x => x.Id == request.Id);
                 if (product is null) return true;
-                _ctx.Products.Remove(product);
+                product.Enabled = false;
                 await _ctx.SaveChangesAsync();
                 return !(await _ctx.Products.AnyAsync(x => x.Id == request.Id));
             }
