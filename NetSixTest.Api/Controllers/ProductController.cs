@@ -25,9 +25,9 @@ namespace NetSixTest.Api.Controllers
             _logger = logger;
         }
 
-        private void LogException( Exception ex, [CallerMemberName] string methodName="")
-        { _logger.LogError("An error happened at " + methodName + " due to " + ex.Message + " exception details: " + 
-            ex.InnerException + " Stack trace: " + ex.StackTrace); 
+        private void LogException(Exception ex, [CallerMemberName] string methodName = "")
+        { _logger.LogError("An error happened at " + methodName + " due to " + ex.Message + " exception details: " +
+            ex.InnerException + " Stack trace: " + ex.StackTrace);
         }
 
 
@@ -36,21 +36,21 @@ namespace NetSixTest.Api.Controllers
         {
             try
             {
-                 
+
                 var productos = await _productoServices.GetAll();
                 return OkResponse(productos);
 
             }
             catch (Exception ex)
             {
-                
+
                 LogException(ex);
                 return ErrorResponse();
             }
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get([FromRoute]int id)
+        public async Task<IActionResult> Get([FromRoute] int id)
         {
             try
             {
@@ -66,11 +66,11 @@ namespace NetSixTest.Api.Controllers
                 return ErrorResponse();
             }
         }
-        
 
 
-        [HttpPut]
-        public async Task<IActionResult> Put([FromBody] ProductModel producto)
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put([FromRoute]int id,[FromBody] ProductModel producto)
         {
             if (!ModelState.IsValid)
             {

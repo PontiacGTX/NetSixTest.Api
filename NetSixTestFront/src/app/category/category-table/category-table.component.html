@@ -1,0 +1,33 @@
+
+<div class="container">
+    <a id='btnCreate' class="btn btn-primary" routerLink="/Category/Create">Create</a>
+    <h3>Category Table</h3>
+    <table mat-table #table1 [dataSource]="dataSource1">
+        <ng-container  matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> id </th>
+            <td mat-cell *matCellDef="let element "> {{this.element.id}} </td>
+        </ng-container>
+        <ng-container  matColumnDef="enabled">
+            <th mat-header-cell *matHeaderCellDef> enabled </th>
+            <td mat-cell *matCellDef="let element "> {{this.element.enabled}} </td>
+        </ng-container>
+        <ng-container  matColumnDef="name">
+            <th mat-header-cell  *matHeaderCellDef> name </th>
+            <td mat-cell *matCellDef="let element "> {{this.element.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="categoryUrl">
+            <th mat-header-cell id="actionNameHeader" *matHeaderCellDef> Actions </th>
+            <div id="containerButtons">
+
+                <td mat-cell *matCellDef="let element"> <a class="btn btn-primary btn-act" routerLink='/Category/{{element.categoryUrl}}'>View </a>
+                    <a class="btn btn-success btn-act" href='/Category/Edit/{{element.categoryUrl}}'>Edit </a>
+                    <a class="btn btn-danger btn-act" (click)="onDeleteCategory(element.id)"
+                    >Delete </a>
+                    <!-- href='/Product/Delete/{{element.productIdUrl}}' -->
+                </td>
+            </div>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayColumns1"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayColumns1"></mat-row>
+    </table>
+</div>

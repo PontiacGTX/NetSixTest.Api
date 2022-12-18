@@ -1,0 +1,20 @@
+
+<ng-template 
+class="container" [ngIf]="this.router.url =='/Category'"  >
+<!-- [ngIfElse]="productDetails" -->
+<app-category-table></app-category-table>>
+</ng-template>
+
+ <ng-template #productCreate [ngIf]="this.router.url == '/Category/Create'">
+    
+    <app-create-category [operation]="this.create"></app-create-category>
+</ng-template>
+
+<ng-template #productCreate [ngIf]="this.router.url.includes('/Category') && this.activatedRoute.snapshot.paramMap.get('id')!=null && !this.router.url.includes('/Category/Edit')">
+<app-category-item [categoryId]="this.categoryId"></app-category-item>
+</ng-template>
+
+<ng-template [ngIf]="this.router.url.includes('/Category/Edit')">
+    
+    <app-create-category [operation]="this.update"></app-create-category>
+</ng-template> 

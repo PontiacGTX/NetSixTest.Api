@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { IndexComponent } from './index/index.component';
+import { CategoryComponent } from './category/category.component';
 import { ProductComponent } from './product/product.component';
-import { TableComponent } from './table/table.component';
 
 const routes: Routes = [{
   component:ProductComponent,
@@ -15,8 +14,29 @@ const routes: Routes = [{
 },
 {
   component:ProductComponent,
+  path:'Product/Edit/:id'
+},
+{
+  component:ProductComponent,
   path:'Product/:id'
 },
+{
+  component:CategoryComponent,
+  path:'Category'
+},
+{
+  component:CategoryComponent,
+  path:'Category/Create'
+},
+{
+  component:CategoryComponent,
+  path:'Category/Edit/:id'
+},
+{
+  component:CategoryComponent,
+  path:'Category/:id'
+},
+
 ];
 
 @NgModule({

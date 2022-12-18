@@ -1,0 +1,37 @@
+
+<div class="container">
+    <form #formId="ngForm" (ngSubmit)="onSubmitCategory(formId.value)" >
+  <h2>Create Product: </h2>
+  <br>
+        <div class="row">
+            <div class="col col-md-auto">
+            <div class="form-group">
+                <label class="form-label">Id</label>
+                <input class="form-control" #id="ngModel" name="id" type="text" [(ngModel)]="this.category.id" disabled="disabled" >
+            </div>
+        </div>
+        <div class="col col-md-auto">
+            <div class="form-group">
+                <label class="form-label">Name</label>
+                <input class="form-control" #name="ngModel" name="name" type="text" [(ngModel)]="this.category.name"  >
+                <span *ngIf="this.category.name.length==0 && formId.touched" style="color:red;">Text  value should not be empty</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-md-auto">
+            <div class="form-group">
+                <label class="form-label">Enabled</label>
+                <input class="form-check-input" #enabled="ngModel" name="enabled" type="checkbox" [(ngModel)]="this.category.enabled"  checked>
+            </div>
+        </div>
+        
+    </div>
+    <div class="col col-md-auto">
+        <div class="form-group">
+            <button type="submit" [disabled]="formId.invalid" class="btn btn-success" >Save</button>
+        </div>
+    </div>
+    
+</form>
+</div>

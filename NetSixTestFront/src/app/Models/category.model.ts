@@ -4,5 +4,4 @@ export class Category {
     id:Number=0;
     name:String='';
     enabled:Boolean=false;
-    products:Product[]=[];
 }

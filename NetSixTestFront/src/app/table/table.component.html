@@ -1,7 +1,8 @@
 
 
 <div class="container">
-    <a id='btnCreate' class="btn btn-primary" routerLink="/Product/Create">Create</a>
+    <a id='btnCreate' class="btn btn-primary" routerLink="/{{entity}}/Create">Create</a>
+    <h3>{{tableTitle}}</h3>
 
     
 <table mat-table #table [dataSource]="dataSource">
@@ -44,3 +45,4 @@
 </table> 
 
 </div>
+

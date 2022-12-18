@@ -1,0 +1,27 @@
+<div class="container">
+    <h3>Product Details:</h3>
+    <br>
+    <div class="row">
+        <div class="col col-2" style="margin-right:3.5%;">
+            <div class="form-group">
+                <label class="form-label">Id</label>
+                <input class="form-control" type="text" [(ngModel)]="this.category.id" disabled="disabled">
+            </div>
+        </div>
+        <div class="col col-md-auto">
+            <div class="form-group">
+                <label class="form-label">Category</label>
+                <input class="form-control" type="text" [(ngModel)]="this.category.name" disabled="disabled">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-md-auto">
+            <div class="form-group">
+                <label class="form-label">Enabled</label>
+                <input class="form-control" type="text" [(ngModel)]="this.category.enabled" disabled="disabled">
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -2,17 +2,18 @@
 <ng-template 
 class="container" [ngIf]="this.router.url =='/Product'"  >
 <!-- [ngIfElse]="productDetails" -->
-<app-table></app-table>
+<app-table [tableTitle]="'Product Table'" [entity]="'Product'"></app-table>
 </ng-template>
 
 <ng-template #productCreate [ngIf]="this.router.url == '/Product/Create'">
-    <app-create-product></app-create-product>
+    <app-create-product [operation]="this.create"></app-create-product>
 </ng-template>
 
-<ng-template #productCreate [ngIf]="this.router.url.includes('/Product') && this.activatedRoute.snapshot.paramMap.get('id')!=null">
+<ng-template #productCreate [ngIf]="this.router.url.includes('/Product') && this.activatedRoute.snapshot.paramMap.get('id')!=null && !this.router.url.includes('/Product/Edit')">
 <app-item [pId]="this.pId"></app-item>
 </ng-template>
 
 <ng-template [ngIf]="this.router.url.includes('/Product/Edit')">
-Edito un producto!
+    
+    <app-create-product [operation]="this.update"></app-create-product>
 </ng-template>

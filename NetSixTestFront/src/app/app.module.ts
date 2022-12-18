@@ -15,9 +15,14 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { IndexComponent } from './index/index.component';
 import { FormsModule } from '@angular/forms';
 import { ItemComponent } from './product/item/item.component';
-import { CreateProductComponent } from './Product/create-product/create-product.component';
+import { CreateProductComponent } from './product/create-product/create-product.component';
 import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CategoryComponent } from './category/category.component';
+import { CategoryTableComponent } from './Category/category-table/category-table.component';
+import { CreateCategoryComponent } from './category/create-category/create-category.component';
+import { CategoryItemComponent } from './category/category-item/category-item.component';
+
 // import { MatSortModule } from '@angular/material/sort';
 @NgModule({
   imports: [
@@ -39,7 +44,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProductComponent,
     IndexComponent,
     ItemComponent,
-    CreateProductComponent
+    CreateProductComponent,
+    CategoryComponent,
+    CategoryTableComponent,
+    CreateCategoryComponent,
+    CategoryItemComponent
     
   ],
   providers: [],

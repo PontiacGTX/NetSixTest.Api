@@ -1,0 +1,76 @@
+table {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    min-width: 500px;
+  }
+  th.mat-header-cell {
+    text-align: center !important;
+    padding: 16.5px;
+    max-width: 300px;
+  }
+  .containerButtons{
+  display: flex;
+  }
+  td.mat-column-categoryUrl{
+    text-align: center !important;
+    float: center !important;
+    align-items: flex-end;
+    align-self: flex-end;
+    -ms-flex-align: end;;
+     height: inherit;
+    left :55%;
+    position:absolute;
+    width:50%;
+  }
+
+  td.mat-cell {
+    text-align: center !important;
+    white-space: break-spaces;
+    padding: 15px;
+    max-width: 300px;
+  }
+
+  .mat-column-name{
+
+    text-align: center !important;
+    white-space: break-spaces;
+    padding: 15px;
+    max-width: 300px;
+  }
+  .mat-column-id{
+
+    text-align: center !important;
+    white-space: break-spaces;
+    padding: 15px;
+    max-width: 300px;
+  }
+  .mat-column-id{
+
+    text-align: center !important;
+    white-space: break-spaces;
+    padding: 15px;
+    max-width: 300px;
+  }
+  #actionNameHeader{
+    margin-right:4%;
+    left :55%;
+    position:absolute;
+    width:20%;
+  }
+  #categoryName{
+    word-wrap: break-word;
+    text-align:center;
+    width: min-content;
+    white-space: break-space;
+  }
+  #btnCreate
+  {
+    margin: 50px;
+   float:right;
+  }
+  .btn-act{
+    width:min-content;
+    height:29px;
+    padding-top:-10px;
+  }

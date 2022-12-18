@@ -20,8 +20,8 @@ export class ItemComponent implements OnInit {
     this.productoService.getProduct(this.pId)
     .subscribe((p:Response)=>{
       this.product = p.data as Product;
-      console.log('here'+this.product);
     });
   }
 
+  
 }

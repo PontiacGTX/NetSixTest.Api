@@ -19,7 +19,7 @@ namespace NetSixTest.DataAccess.Command
                 }
                 public async Task<bool> Handle(DeleteCategoryByIdCommand request, CancellationToken cancellationToken)
                 {
-                    var category = await _ctx.Categories.FirstOrDefaultAsync(x => x.Id == request.Id && !x.Enabled);
+                    var category = await _ctx.Categories.FirstOrDefaultAsync(x => x.Id == request.Id );
                     if (category is null) return true;
                     category.Enabled = false;
                     await _ctx.SaveChangesAsync();
