@@ -52,12 +52,13 @@ export class TableComponent implements OnInit {
   loadData(){
     this.displayColumns=
     [ 
-      'categoryName',
-      'enabled',
+      
       'id',
+      'categoryName',
       'name',
-      'price',
       'quantity',
+      'price',
+      'enabled',
       'productIdUrl'
     ]
     this.productService.getProducts().subscribe((d:Response )=>{
@@ -77,6 +78,37 @@ export class TableComponent implements OnInit {
      })
   }
 
+  sortData(sort:Sort){
+    const data = this.products.slice();
+      if(!sort.active || sort.direction===''){
+          this.products = data;
+          return;
+      }
+
+      const sortedData =data.sort((elA,elB)=>{
+          const isAsc= sort.direction==='asc';
+          switch(sort.active)
+          {     
+            case 'name':
+             return this.compare(elA.name,elB.name,isAsc);
+            case 'id':
+             return this.compare(elA.id,elB.id,isAsc);
+            case 'quantity':
+              return this.compare(elA.quantity,elB.quantity,isAsc);
+            case 'price':
+              return  this.compare(elA.price,elB.price,isAsc);
+            case 'categoryName':
+              return  this.compare(elA.categoryName,elB.categoryName,isAsc);
+            default:
+               return 0;
+          }
+      });
+
+
+  }
+   compare(a: number | string, b: number | string, isAsc: boolean) {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+  }
   onDeleteProduct(id:any){
 
     this.productService.deleteProduct(`${id}`)

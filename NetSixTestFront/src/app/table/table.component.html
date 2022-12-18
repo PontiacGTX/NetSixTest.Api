@@ -1,44 +1,55 @@
-
+  
 
 <div class="container">
     <a id='btnCreate' class="btn btn-primary" routerLink="/{{entity}}/Create">Create</a>
     <h3>{{tableTitle}}</h3>
 
     
-<table mat-table #table [dataSource]="dataSource">
+<table mat-table matSort  #table [dataSource]="dataSource"  (matSortChange)="sortData($event)">
     <ng-container matColumnDef="categoryName">
-        <th mat-header-cell *matHeaderCellDef> categoryName </th>
+        <th mat-header-cell *matHeaderCellDef style=" margin-left: 0% !important;" mat-sort-header="categoryName" > categoryName </th>
         <td mat-cell *matCellDef="let element"> {{element.categoryName}} </td>
     </ng-container>
     <ng-container matColumnDef="enabled">
-        <th mat-header-cell *matHeaderCellDef> enabled </th>
+        <th mat-header-cell style=" margin-left: -1% !important;" *matHeaderCellDef> enabled </th>
         <td mat-cell *matCellDef="let element"> {{element.enabled}} </td>
     </ng-container>
     <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> id </th>
+        <th mat-header-cell *matHeaderCellDef  style=" margin-left: 3% !important;" mat-sort-header="id"> id </th>
         <td mat-cell *matCellDef="let element"> {{element.id}} </td>
     </ng-container>
     <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef> price </th>
-        <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+        <th mat-header-cell *matHeaderCellDef style=" margin-left: -1% !important;" mat-sort-header="price"> price </th>
+        <div id="containerPrice">
+            <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+        </div>
+
     </ng-container>
-    <ng-container matColumnDef="name">
-        <th mat-header-cell id="productNameHeader" *matHeaderCellDef> name </th>
-        <td mat-cell id="productName" *matCellDef="let element"> {{element.name}} </td>
+    <ng-container matColumnDef="name" >
+        <th mat-header-cell id="productNameHeader" style=" margin-left: -1% !important;" mat-sort-header="name" *matHeaderCellDef> name </th>
+       
+            <td mat-cell id="productName" *matCellDef="let element"> {{element.name}} </td>
+
+        
     </ng-container>
     <ng-container matColumnDef="quantity">
-        <th mat-header-cell mat-sort-header *matHeaderCellDef> quantity </th>
-        <td mat-cell *matCellDef="let element">   {{element.quantity}} </td>
+        <th mat-header-cell mat-sort-header mat-sort-header="quantity" style=" margin-left: -1% !important;" *matHeaderCellDef> quantity </th>
+    
+     <td mat-cell  *matCellDef="let element">   {{element.quantity}} </td>
+
     </ng-container>
     <ng-container matColumnDef="productIdUrl">
-        <th mat-header-cell *matHeaderCellDef> Actions </th>
-        <td mat-cell *matCellDef="let element"> <a class="btn btn-primary btn-act" routerLink='/Product/{{element.productIdUrl}}'>View </a>
-            <a class="btn btn-success btn-act" href='/Product/Edit/{{element.productIdUrl}}'>Edit </a>
-            <a class="btn btn-danger btn-act" (click)="onDeleteProduct(element.id)"
-            >Delete </a>
-            <!-- href='/Product/Delete/{{element.productIdUrl}}' -->
-        </td>
-    </ng-container>
+        <th mat-header-cell *matHeaderCellDef id="actionNameHeader"> Actions </th>
+        <div id="containerButtons">
+            <td mat-cell *matCellDef="let element"> <a class="btn btn-primary btn-act" routerLink='/Product/{{element.productIdUrl}}'>View </a>
+                <a class="btn btn-success btn-act" href='/Product/Edit/{{element.productIdUrl}}'>Edit </a>
+                <a class="btn btn-danger btn-act" (click)="onDeleteProduct(element.id)"
+                >Delete </a>
+                <!-- href='/Product/Delete/{{element.productIdUrl}}' -->
+            </td>
+        </div>
+            
+        </ng-container>
     <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayColumns"></mat-row>
 

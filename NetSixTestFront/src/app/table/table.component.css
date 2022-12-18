@@ -1,36 +1,77 @@
 table {
     width: 100%;
     overflow-x: auto;
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
     min-width: 500px;
   }
   th.mat-header-cell {
     text-align: center !important;
-    padding: 16.5px;
-    max-width: 300px;
+    max-width: 200px;
+     padding:-20px; 
+    margin: 0 auto;
   }
   td.mat-cell {
     text-align: center !important;
-    white-space: break-spaces;
-    padding: 15px;
-    max-width: 300px;
+    max-width: 200px;
+    position: relative;
+    padding:15px;
+    margin: 0 auto;
   }
-  #productNameHeader{
-    margin-right:4%;
+   #productNameHeader{
+    /* margin-right:4%;*/ 
+    margin-left: -6% !important; 
   }
-  #productName{
+ td.mat-cell.cdk-cell.cdk-column-name.mat-column-name.ng-star-inserted{
+  
+  margin-right:1% !important;
+ } */
+ td.mat-cell.cdk-cell.cdk-column-name.mat-column-price.ng-star-inserted{
+  
+  margin-right:-1% !important;
+ }
+    #productName{
     word-wrap: break-word;
     text-align:center;
     width: min-content;
     white-space: break-space;
-  }
+  }  
+
+   /* td.mat-cell.cdk-cell.cdk-column-enabled.mat-column-enabled.ng-star-inserted{
+    text-align: left !important;
+    padding-left: -20px  !important;
+    margin-left: 30%;
+    position: absolute;
+    word-wrap: break-word;
+    text-align:center;
+  }  */
+  /* td.mat-column-productIdUrl{
+    text-align: center !important;
+    float: right !important;
+    align-items: flex-end;
+    align-self: flex-end;
+    width: min-content;
+    -ms-flex-align: baseline;
+     height: inherit;
+     left: 65%;
+    position:absolute;
+    width:23%;
+  }  */
+  /* #actionNameHeader{
+  
+    left :65%;
+    position:absolute;
+    width:35%;
+  } */
+  .containerButtons{
+    display: flex;
+    }
   #btnCreate
   {
     margin: 50px;
    float:right;
   }
-  .btn-act{
+  /* .btn-act{
     width:min-content;
     height:29px;
     padding-top:-10px;
-  }
+  }  */

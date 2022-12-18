@@ -1,9 +1,9 @@
 export class ProductViewModel {
-    id:Number=0;
-    price:Number=0.0;
-    quantity:Number=0;
-    enabled:Boolean=false;
-    name:String='';
+    id:number=0;
+    price:number=0.0;
+    quantity:number=0;
+    enabled:boolean=false;
+    name:string='';
     categoryName:string='';
     productIdUrl:string='';
 }
