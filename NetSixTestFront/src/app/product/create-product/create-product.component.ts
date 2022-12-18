@@ -25,21 +25,7 @@ export class CreateProductComponent implements OnInit {
     this.product.enabled=true;
     this.product.categoryId = 1;
    
-    this.operation =  this.route.url.includes('Create')  ?  CRUDOpEnum.CREATE:CRUDOpEnum.UPDATE;
-    if(this.operation == CRUDOpEnum.UPDATE && this.activatedRoute.snapshot.paramMap.get('id')!=null)
-    {
-        productDataService.getProduct(this.activatedRoute.snapshot.paramMap.get('id'))
-        .subscribe((r:Response)=>{
-          this.product  = r.data as Product;
-          this.getCategories();
-        });
-    }
-    else
-    {
-      this.product.categoryId=0;
-      this.getCategories();
-      this.product.categoryId=this.categories!=null && this.categories.length>0 ? this.categories[0].id:0;
-    }
+   
   }
   onOptionsSelected(value:any|null){
 
@@ -100,7 +86,22 @@ export class CreateProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getCategories();
+    this.operation =  this.route.url.includes('Create')  ?  CRUDOpEnum.CREATE:CRUDOpEnum.UPDATE;
+    if(this.operation == CRUDOpEnum.UPDATE && this.activatedRoute.snapshot.paramMap.get('id')!=null)
+    {
+        this.productDataService.getProduct(this.activatedRoute.snapshot.paramMap.get('id'))
+        .subscribe((r:Response)=>{
+          this.product  = r.data as Product;
+          console.log(this.product)
+          this.getCategories();
+        });
+    }
+    else
+    {
+      this.product.categoryId=0;
+      this.getCategories();
+      this.product.categoryId=this.categories!=null && this.categories.length>0 ? this.categories[0].id:0;
+    }
   }
 
 }

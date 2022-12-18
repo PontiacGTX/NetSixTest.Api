@@ -17,7 +17,7 @@
                
                 <div *ngIf="this.categories!=null && this.categories.length>0; else createCategory">
                     <select  class="form-control" #categoryId="ngModel" name="categoryId" [(ngModel)]="this.product.categoryId"   (change)="onOptionsSelected(categoryId.value)">
-                        <option *ngFor="let cat of this.categories" value="{{cat.id}}" >{{cat.name}}</option>
+                        <option    *ngFor="let cat of this.categories" value="{{cat.id}}"  selected="{{cat.id==product.categoryId}}"  >{{cat.name}}</option>
                     </select>
                 </div>
 
