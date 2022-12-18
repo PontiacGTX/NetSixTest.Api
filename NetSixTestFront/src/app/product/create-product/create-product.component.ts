@@ -36,7 +36,11 @@ export class CreateProductComponent implements OnInit {
   response:any;
   onSubmitProduct(prod:Product){
     console.log(prod);
-    console.log(this.product);
+   if(this.product.categoryId==0)
+   {
+    alert('this products needs a valid category, please create one');
+    return;
+   }
    switch(this.operation)
    {
     case CRUDOpEnum.CREATE:
