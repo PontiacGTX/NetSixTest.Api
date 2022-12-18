@@ -88,7 +88,7 @@ export class CreateProductComponent implements OnInit {
   getCategories(){
     return  this.categoryDataService.getCategories().subscribe((r:Response)=>
     {
-        this.categories = r.data as Category[];
+        this.categories = (r.data as Category[]).filter(c=>c.enabled);
     })
   }
 

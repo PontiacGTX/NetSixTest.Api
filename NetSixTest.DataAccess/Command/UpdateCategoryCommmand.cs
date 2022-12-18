@@ -25,11 +25,12 @@ namespace NetSixTest.DataAccess.Command
             }
             public async Task<Category> Handle(UpdateCategoryCommmand command, CancellationToken cancellationToken)
             {
-                var producto = await _ctx.Categories.FirstOrDefaultAsync(x => x.Id == command.Field.Id);
-                if (producto is null) return null;
-                producto.Name = command.Field.Name;
+                var category = await _ctx.Categories.FirstOrDefaultAsync(x => x.Id == command.Field.Id);
+                if (category is null) return null;
+                category.Name = command.Field.Name;
+                category.Enabled= command.Field.Enabled;
                 await _ctx.SaveChangesAsync();
-                return (await _ctx.Categories.FirstOrDefaultAsync(x => x.Id == producto.Id))!;
+                return (await _ctx.Categories.FirstOrDefaultAsync(x => x.Id == category.Id))!;
             }
         }
     }

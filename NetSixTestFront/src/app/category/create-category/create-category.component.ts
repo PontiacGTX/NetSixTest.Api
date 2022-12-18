@@ -28,11 +28,11 @@ export class CreateCategoryComponent implements OnInit {
   response:any;
   canRedirect:boolean=false;
   onSubmitCategory(cat:Category){
+    console.log(this.category);
    switch(this.operation)
    {
     case CRUDOpEnum.CREATE:
     this.categoryService.createCategory(cat).subscribe((r:Response)=>{
-      console.log(r);
       if((r as Response).statusCode==200|| (r as Response).statusCode==201){
         this.canRedirect=true;
       }
@@ -44,6 +44,7 @@ export class CreateCategoryComponent implements OnInit {
     break;
     case CRUDOpEnum.UPDATE:
       this.categoryService.updateCategory(this.category).subscribe((r:any )=>{
+      console.log(cat);
         if((r as Response).statusCode==200)
         {
           this.canRedirect=true;

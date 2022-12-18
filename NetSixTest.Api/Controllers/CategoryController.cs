@@ -70,8 +70,8 @@ namespace NetSixTest.Api.Controllers
 
 
 
-        [HttpPut]
-        public async Task<IActionResult> Put([FromBody] CategoryModel category)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put([FromRoute]int id,[FromBody] CategoryModel category)
         {
             if (!ModelState.IsValid)
             {
