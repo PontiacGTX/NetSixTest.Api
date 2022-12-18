@@ -31,9 +31,15 @@ export class CreateProductComponent implements OnInit {
         productDataService.getProduct(this.activatedRoute.snapshot.paramMap.get('id'))
         .subscribe((r:Response)=>{
           this.product  = r.data as Product;
+          this.getCategories();
         });
     }
-    this.getCategories();
+    else
+    {
+      this.product.categoryId=0;
+      this.getCategories();
+      this.product.categoryId=this.categories!=null && this.categories.length>0 ? this.categories[0].id:0;
+    }
   }
   onOptionsSelected(value:any|null){
 
@@ -88,7 +94,8 @@ export class CreateProductComponent implements OnInit {
   getCategories(){
     return  this.categoryDataService.getCategories().subscribe((r:Response)=>
     {
-        this.categories = (r.data as Category[]).filter(c=>c.enabled);
+       
+        this.categories = (r.data as Category[]).filter(c=>c.enabled || c.id == this.product.categoryId);
     })
   }
 

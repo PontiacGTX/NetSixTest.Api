@@ -14,9 +14,18 @@
             <div class="form-group">
                 <label class="form-label">Category</label>
                 
-                <select  class="form-control" #categoryId="ngModel" name="categoryId" [(ngModel)]="this.product.categoryId"   (change)="onOptionsSelected(categoryId.value)">
-                    <option *ngFor="let cat of this.categories" value="{{cat.id}}" >{{cat.name}}</option>
-                </select>
+               
+                <div *ngIf="this.categories!=null && this.categories.length>0; else createCategory">
+                    <select  class="form-control" #categoryId="ngModel" name="categoryId" [(ngModel)]="this.product.categoryId"   (change)="onOptionsSelected(categoryId.value)">
+                        <option *ngFor="let cat of this.categories" value="{{cat.id}}" >{{cat.name}}</option>
+                    </select>
+                </div>
+
+                <ng-template #createCategory>
+                    <a id='btnCreateCategory' class="btn btn-primary" routerLink="/Category/Create">Create</a>
+                </ng-template>
+                
+                
             </div>
         </div>
     </div>
