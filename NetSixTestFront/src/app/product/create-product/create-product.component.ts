@@ -44,36 +44,51 @@ export class CreateProductComponent implements OnInit {
   response:any;
   public selectedImages: FileItem[] = [];
 
- onFilesSelected(event: Event): void {
-     const input = event.target as HTMLInputElement; 
  
-     if (input.files) {
-       Array.from(input.files).forEach(file => {
-         const reader = new FileReader();
-         reader.onload = (e: any) => {
-           this.selectedImages.push({
+  onFilesSelected(event: Event): void {
+    const input = event.target as HTMLInputElement; 
+    const files = input.files;
+
+    if (files) {
+      Array.from(files).forEach(file => {
+        const reader = new FileReader();
+
+        
+        reader.onload = (e: any) => {
+           
+          this.selectedImages.push({
             name: file.name,
-            base64: e.target.result,
-          });  
-         };
-         reader.readAsDataURL(file);
-       });
-     }
-   }
-   
-     base64ToByteArray(base64: string): Uint8Array {
-  // Remove the data URL prefix if present
-  const base64Data = base64.split(',')[1];
+            base64: e.target.result as string,  
+          });
+        };
+
+         
+        reader.readAsDataURL(file);
+      });
+    }
+     
+    input.value = '';
+  }
+
+    base64ToByteArray(base64String: string): Uint8Array {
+  // Remove the data URL prefix if present (e.g. data:image/jpeg;base64,)
+  const base64Data = base64String.split(',')[1] || base64String;
+
+  // Decode base64 string to a binary string
   const binaryString = window.atob(base64Data);
+
+  // Create Uint8Array with the size of the binary string length
   const len = binaryString.length;
   const bytes = new Uint8Array(len);
 
+  // Convert each char into a byte
   for (let i = 0; i < len; i++) {
     bytes[i] = binaryString.charCodeAt(i);
   }
 
   return bytes;
 }
+
   onSubmitProduct(prod:Product){
     console.log(prod);
    if(this.product.categoryId==0)

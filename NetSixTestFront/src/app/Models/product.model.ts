@@ -9,5 +9,5 @@ export class Product {
     name:string='';
     categoryId:number=0;
     category:Category=new Category();
-    productPictures:ProductPicture[];
+    pictures:ProductPicture[];
 }

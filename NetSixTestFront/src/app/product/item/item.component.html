@@ -42,6 +42,16 @@
                 <input class="form-control" type="text" [(ngModel)]="this.product.enabled" disabled="disabled">
             </div>
         </div>
+        
+    </div>
+    <div class="row">
+    <div class="col-md-4">
+          <h5>Images</h5>
+            <div *ngIf="product.pictures.length === 0">No images selected.</div>
+            <div *ngFor="let img of product.pictures" class="mb-2">
+            <img [src]="byteArrayToBase64(img)" class="img-thumbnail" style="max-width: 100px" />
+        </div>
+        </div>
     </div>
 </div>
 
