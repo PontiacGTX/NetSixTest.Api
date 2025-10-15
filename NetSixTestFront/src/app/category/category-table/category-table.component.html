@@ -1,4 +1,3 @@
-
 <div class="container">
     <a id='btnCreate' class="btn btn-primary" routerLink="/Category/Create">Create</a>
     <h3>Category Table</h3>
@@ -7,19 +6,19 @@
             <tr>
                 <th scope="col">id</th>
                 <th scope="col">enabled</th>
-                <th scope="col">name</th>
-                <th scope="col">Actions</th>
+                <th scope="col">name</th> 
+                <th scope="col col-sm-4">Actions</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let element of dataSource1">
+            <tr  *ngFor="let element of dataSource1">
                 <td>{{element.id}}</td>
                 <td>{{element.enabled}}</td>
                 <td>{{element.name}}</td>
-                <td>
+                <td class="col-sm-4">   
                     <a class="btn btn-primary btn-act" routerLink='/Category/{{element.categoryUrl}}'>View </a>
                     <a class="btn btn-success btn-act" href='/Category/Edit/{{element.categoryUrl}}'>Edit </a>
-                    <a class="btn btn-danger btn-act" (click)="onDeleteCategory(element.id)">Delete </a>
+                    <a class="btn btn-danger btn-act"  (click)="onDeleteCategory(element.id)">Delete</a>
                 </td>
             </tr>
         </tbody>
