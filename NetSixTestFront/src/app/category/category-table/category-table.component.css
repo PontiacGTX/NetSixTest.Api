@@ -4,51 +4,9 @@ table {
     overflow-y: hidden;
     min-width: 500px;
   }
-  th.mat-header-cell {
-    text-align: center !important;
-    padding: 16.5px;
- 
-  }
   .containerButtons{
   display: flex;
   flex-direction: column;
-  }
-  td.mat-column-categoryUrl{
-    text-align: center !important;
-    float: center !important;
-    align-items: flex-end;
-    align-self: flex-end;
-    -ms-flex-align: end;;
-     height: inherit;
-    left :55%;
-    position:absolute;
-    width:50%;
-  }
-
-  td.mat-cell {
-    text-align: center !important;
-    white-space: break-spaces;
-    padding: 15px; 
-    max-width: none !important;
-  }
-
-  .mat-column-name{
-
-    text-align: center !important;
-    white-space: break-spaces;
-    padding: 15px;
-  }
-  .mat-column-id{
-
-    text-align: center !important;
-    white-space: break-spaces;
-    padding: 15px;
-  }
-  #actionNameHeader{
-    margin-right:4%;
-    left :55%;
-    position:absolute;
-    width:20%;
   }
   #categoryName{
     word-wrap: break-word;

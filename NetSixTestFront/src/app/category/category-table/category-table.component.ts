@@ -14,7 +14,7 @@ export class CategoryTableComponent implements OnInit {
   categoriesSrc: Category[]=[];
   data:CategoryViewModel[] =[];
   displayColumns1:string[] = [];
-  dataSource1:MatTableDataSource<CategoryViewModel>= new MatTableDataSource<CategoryViewModel>();
+  dataSource1:CategoryViewModel[];
   constructor(public categoryDataService:CategoryDataService) {
   
    }
@@ -41,7 +41,7 @@ export class CategoryTableComponent implements OnInit {
     } as CategoryViewModel)
 );
     console.log(this.categoriesSrc);
-    this.dataSource1 = new MatTableDataSource<CategoryViewModel>(this.data);
+    this.dataSource1 = (this.data);
 
     this.categoryDataService.getCategories().subscribe((d:Response )=>{
     
@@ -52,7 +52,7 @@ export class CategoryTableComponent implements OnInit {
                         'enabled':c.enabled,
                         'categoryUrl':`${c.id}`
                       } as CategoryViewModel) );
-      this.dataSource1 = new MatTableDataSource<CategoryViewModel>(this.data);
+      this.dataSource1 = (this.data);
    });
   }
   onDeleteCategory(id:any){

@@ -2,8 +2,6 @@ import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Product } from '../Models/product.model';
 import { ProductDataService } from '../Services/product-data.service';
 import { Response } from '../Models/response.model';
-import { MatTableDataSource } from '@angular/material/table';
-import {Sort, MatSortHeader,MatSort }from '@angular/material/sort';
 import {ProductViewModel } from '../Models/product-view-model.model'
 import{Router } from '@angular/router';
 import { EntityEnum } from '../Models/entity-enum.model';
@@ -19,25 +17,22 @@ export class TableComponent implements OnInit {
 
   
   
-  dataSource :MatTableDataSource<ProductViewModel>=new MatTableDataSource<ProductViewModel>();
-  dataSource1 :MatTableDataSource<CategoryViewModel>=new MatTableDataSource<CategoryViewModel>();
+  dataSource :ProductViewModel[]=[];
+  dataSource1 :CategoryViewModel[]=[];
   displayColumns:string[]=[];
   displayColumns1:string[]=[];
   @Input()
   tableTitle:string;
   @Input()
   entity:string;
-  @ViewChild(MatSort) sort: MatSort
+  sortedColumn: string = '';
+  sortDirection: string = '';
   constructor(private router:Router, public productService:ProductDataService , public categoryDataService:CategoryDataService) {
 
 
    }
 
 
-  ngAfterInit()
-  {
-    this.dataSource.sort = this.sort;
-  }
   products:ProductViewModel[] =[];
   public categories:CategoryViewModel[]=[];
   ngOnInit(): void {
@@ -73,21 +68,28 @@ export class TableComponent implements OnInit {
                         'name':p.name,
                         'productIdUrl':`${p.id}`
                       } as ProductViewModel) );
-      this.dataSource = new MatTableDataSource<ProductViewModel>(this.products);
+      this.dataSource =(this.products);
   
      })
   }
 
-  sortData(sort:Sort){
+  sortData(active: string){
     const data = this.products.slice();
-      if(!sort.active || sort.direction===''){
-          this.products = data;
+      if(this.sortedColumn === active){
+        this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+      } else {
+        this.sortDirection = 'asc';
+        this.sortedColumn = active;
+      }
+
+      if(!active || this.sortDirection ===''){
+          this.dataSource = data;
           return;
       }
 
-      const sortedData =data.sort((elA,elB)=>{
-          const isAsc= sort.direction==='asc';
-          switch(sort.active)
+      this.dataSource =data.sort((elA,elB)=>{
+          const isAsc= this.sortDirection ==='asc';
+          switch(active)
           {     
             case 'name':
              return this.compare(elA.name,elB.name,isAsc);
