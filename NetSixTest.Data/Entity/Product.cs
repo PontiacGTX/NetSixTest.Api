@@ -24,6 +24,15 @@ public class Product : IEntity
         this.Quantity = model.Quantity;
         this.Id = model.Id;
     }
+    public Product(ProductInsertModel model)
+    {
+        this.Enabled = model.Enabled; 
+        this.Name = model.Name;
+        this.Price = model.Price;
+        this.CategoryId = model.CategoryId;
+        this.Quantity = model.Quantity;
+        this.Id = model.Id;
+    }
     [Key]
     public int Id { get ; set ; }
 

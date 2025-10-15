@@ -25,7 +25,7 @@ namespace NetSixTest.Services.Services
         {
             return await _mediator.Send(new GetCategoryByIdQuery() { Id = id });
         }
-        public async Task<Category> GetCategory(CategoryModel Model)
+        public async Task<Category> GetCategory(CategoryInsertModel Model)
         {
             return (await this.Get(x => x.Name.ToUpper().Trim() == Model.Name.Trim())).FirstOrDefault();
         }
@@ -53,7 +53,7 @@ namespace NetSixTest.Services.Services
         {
             return await _mediator.Send(new ExistCategoryByIdCommand() { Id = id });
         }  
-        public async Task<bool> ExistCategory(CategoryModel model)
+        public async Task<bool> ExistCategory(CategoryInsertModel model)
         {
             return (await ExistCategory(x=>x.Name.ToUpper().Trim() == model.Name.ToUpper().Trim()));
         }

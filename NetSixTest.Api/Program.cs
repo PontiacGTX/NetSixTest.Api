@@ -10,6 +10,7 @@ using NetSixTest.Services.Validation;
 using System.Reflection;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using NetSixTest.DataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,8 +31,13 @@ builder.Services.AddControllers().AddJsonOptions(o =>
 });
 builder.Services.AddDbContext<AppDbContext>(o =>
 {
-    o.UseSqlite(builder.Configuration.GetConnectionString("Sqlite"));
+    o.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"));
+});
 
+builder.Services.AddScoped<AdoNetRepository>(serviceProvider =>
+{
+    var connectionString = builder.Configuration.GetConnectionString("SqlServer");
+    return new AdoNetRepository(connectionString);
 });
 
 builder.Services.AddScoped<CategoryService>();

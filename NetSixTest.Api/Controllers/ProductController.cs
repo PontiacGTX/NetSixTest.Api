@@ -92,7 +92,7 @@ namespace NetSixTest.Api.Controllers
 
         
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] ProductModel producto)
+        public async Task<IActionResult> Post([FromBody] ProductInsertModel producto)
         {
             if (!ModelState.IsValid)
             {

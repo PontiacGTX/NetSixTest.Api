@@ -18,6 +18,12 @@ namespace NetSixTest.Data.Entity
 
         }
 
+        public Category(CategoryInsertModel model)
+        {
+            this.Id = model.Id;
+            this.Name = model.Name;
+            this.Enabled= model.Enabled;
+        }
         public Category(CategoryModel model)
         {
             this.Id = model.Id;

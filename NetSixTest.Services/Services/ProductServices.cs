@@ -57,7 +57,16 @@ namespace NetSixTest.Services.Services
             return await this.ExistProduct(x =>
                  x.Name.ToLower() == product.Name.ToLower() && x.CategoryId == product.CategoryId);
         }
+        public async Task<bool> ExistProduct(ProductInsertModel product)
+        {
+            return await this.ExistProduct(x =>
+                 x.Name.ToLower() == product.Name.ToLower() && x.CategoryId == product.CategoryId);
+        }
         public async Task<Product> GetProduct(ProductModel product)
+        {
+            return (await this.GetAll(x => x.Name.ToLower() == product.Name.ToLower() && x.CategoryId == product.CategoryId)).FirstOrDefault()!;
+        }
+        public async Task<Product> GetProduct(ProductInsertModel product)
         {
             return (await this.GetAll(x => x.Name.ToLower() == product.Name.ToLower() && x.CategoryId == product.CategoryId)).FirstOrDefault()!;
         }

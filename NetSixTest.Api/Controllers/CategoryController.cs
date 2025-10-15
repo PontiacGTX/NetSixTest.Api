@@ -93,7 +93,7 @@ namespace NetSixTest.Api.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CategoryModel category)
+        public async Task<IActionResult> Post([FromBody] CategoryInsertModel category)
         {
             if (!ModelState.IsValid)
             {

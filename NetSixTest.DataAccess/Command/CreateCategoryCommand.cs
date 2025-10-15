@@ -16,13 +16,19 @@ namespace NetSixTest.DataAccess.Command
         class CreateCategoryoCommandHandler : IRequestHandler<CreateCategoryCommand, Category>
         {
             private AppDbContext _ctx { get; }
+            private readonly AdoNetRepository _adoNetRepository;
 
-            public CreateCategoryoCommandHandler(AppDbContext ctx)
+            public CreateCategoryoCommandHandler(AppDbContext ctx, AdoNetRepository adoNetRepository)
             {
                 _ctx = ctx;
+                _adoNetRepository = adoNetRepository;
             }
             public async Task<Category> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
             {
+                // ADO.NET implementation
+                var adoNetResult = await _adoNetRepository.CreateCategoryAsync(request.Field);
+                if (adoNetResult != null) return adoNetResult;
+
                 Category inventarioItem = new();
                 inventarioItem.Id = request.Field.Id;
                 inventarioItem.Name = request.Field.Name;
