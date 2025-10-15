@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NetSixTest.Data.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,5 +27,6 @@ namespace NetSixTest.Data.Models
         public int Quantity { get; set; }
         public bool Enabled { get; set; }
         public int CategoryId { get; set; }
+        public IList<ProductPicture>? ProductPictures { get; set; } = null;
     }
 }

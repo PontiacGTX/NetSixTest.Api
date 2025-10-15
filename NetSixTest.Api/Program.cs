@@ -42,6 +42,7 @@ builder.Services.AddScoped<AdoNetRepository>(serviceProvider =>
 
 builder.Services.AddScoped<CategoryService>();
 builder.Services.AddScoped<ProductServices>();
+builder.Services.AddScoped<ProductPictureServices>();
 builder.Services.AddScoped<IValidator<ProductModel>,ProductValidator>();
 builder.Services.AddScoped<IValidator<CategoryModel>,CategoryValidator>();
 

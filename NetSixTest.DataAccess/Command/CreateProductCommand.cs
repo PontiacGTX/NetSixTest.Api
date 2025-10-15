@@ -33,6 +33,7 @@ public class CreateProductCommand : IPropertyFieldHolder<Product>, IRequest<Prod
             inventarioItem.Quantity =request.Field.Quantity;
             inventarioItem.Quantity =request.Field.Quantity;
             inventarioItem.Enabled =request.Field.Enabled;
+
             var entry = _ctx.Products.Add(inventarioItem);
             await _ctx.SaveChangesAsync();
             return entry.Entity!;

@@ -17,6 +17,7 @@ namespace NetSixTest.Api.Controllers
     public class ProductController : HttpControllerBase
     {
         private ProductServices _productoServices;
+        private ProductPictureServices _productPictureServices;
         private readonly ILogger<ProductController> _logger;
 
         public ProductController(ProductServices productoServices, ILogger<ProductController> logger)
@@ -108,7 +109,11 @@ namespace NetSixTest.Api.Controllers
                     return OkResponse(producto);
                 }
                  var result =  await _productoServices.CreateProduct(new(producto));
-               
+
+                    if(result!=null && producto.ProductPictures != null)
+                    {
+                        await _productPictureServices.AddProductPicture(producto.ProductPictures);
+                    }
 
                 return OkResponse(result);
             }

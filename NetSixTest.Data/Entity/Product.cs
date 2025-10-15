@@ -42,4 +42,5 @@ public class Product : IEntity
     public bool Enabled { get; set; }
     public int CategoryId { get; set; }
     public Category Category { get; set; }
+    public ICollection<ProductPicture>? Picture { get; set; }
 }
