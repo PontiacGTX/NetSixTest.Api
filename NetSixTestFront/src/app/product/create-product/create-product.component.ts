@@ -8,6 +8,14 @@ import { Router } from '@angular/router';
 import { CRUDOpEnum } from 'src/app/Models/crudop-enum.model';
 import { ActivatedRoute } from '@angular/router';
 import { CdkRecycleRows } from '@angular/cdk/table';
+import { ProductPicture } from 'src/app/Models/product-picture.model';
+import { InsertProductPicture } from 'src/app/Models/insert-product-picture.model';
+import { InsertProduct } from 'src/app/Models/insert-product.model';
+
+export class FileItem {
+  base64:string;
+  name:string;
+}
 @Component({
   selector: 'app-create-product',
   templateUrl: './create-product.component.html',
@@ -34,6 +42,38 @@ export class CreateProductComponent implements OnInit {
   
   canRedirect:Boolean=false;
   response:any;
+  public selectedImages: FileItem[] = [];
+
+ onFilesSelected(event: Event): void {
+     const input = event.target as HTMLInputElement; 
+ 
+     if (input.files) {
+       Array.from(input.files).forEach(file => {
+         const reader = new FileReader();
+         reader.onload = (e: any) => {
+           this.selectedImages.push({
+            name: file.name,
+            base64: e.target.result,
+          });  
+         };
+         reader.readAsDataURL(file);
+       });
+     }
+   }
+   
+     base64ToByteArray(base64: string): Uint8Array {
+  // Remove the data URL prefix if present
+  const base64Data = base64.split(',')[1];
+  const binaryString = window.atob(base64Data);
+  const len = binaryString.length;
+  const bytes = new Uint8Array(len);
+
+  for (let i = 0; i < len; i++) {
+    bytes[i] = binaryString.charCodeAt(i);
+  }
+
+  return bytes;
+}
   onSubmitProduct(prod:Product){
     console.log(prod);
    if(this.product.categoryId==0)
@@ -44,16 +84,34 @@ export class CreateProductComponent implements OnInit {
    switch(this.operation)
    {
     case CRUDOpEnum.CREATE:
-    this.productDataService.createProduct(prod).subscribe((r:Response)=>{
-      console.log(r);
-      if((r as Response).statusCode==200|| (r as Response).statusCode==201){
-        this.canRedirect=true;
-      }
-      else
-      {
-        this.response = r;
-      }
-    });
+      let insertProduct :InsertProduct=new InsertProduct();
+      insertProduct.productPictures =this.selectedImages.map((file, index) =>
+                                                         {  
+                                                              const base64 = file.base64;
+                                                              console.log(base64)
+                                                              //const byteArray = this.base64ToByteArray(base64); 
+                                                              const pic: InsertProductPicture = {
+                                                                fileName: file.name,
+                                                                pictureData: base64.split(',')[1]
+                                                              };
+                                                                  return pic;
+                                                        });
+      insertProduct.categoryId = prod.categoryId;
+      insertProduct.enabled = prod.enabled;
+      insertProduct.name = prod.name;
+      insertProduct.price =prod.price;    
+      insertProduct.quantity = prod.quantity;                                             
+      console.log(insertProduct);                                                   
+      this.productDataService.createProduct(insertProduct).subscribe((r:Response)=>{
+            console.log(r);
+            if((r as Response).statusCode==200|| (r as Response).statusCode==201){
+              this.canRedirect=true;
+            }
+            else
+            {
+              this.response = r;
+            }
+          });
     break;
     case CRUDOpEnum.UPDATE:
       this.productDataService.updateProduct(this.product).subscribe((r:any )=>{

@@ -1,71 +1,164 @@
-
 <div class="container">
-    <form #formId="ngForm" (ngSubmit)="onSubmitProduct(formId.value)" >
-  <h2>Create Product: </h2>
-  <br>
-        <div class="row">
-            <div class="col col-md-auto">
-            <div class="form-group">
-                <label class="form-label">Id</label>
-                <input class="form-control" #id="ngModel" name="id" type="text" [(ngModel)]="this.product.id" disabled="disabled" >
-            </div>
-        </div>
-        <div class="col col-md-4">
-            <div class="form-group">
-                <label class="form-label">Category</label>
-                
-               
-                <div *ngIf="this.categories!=null && this.categories.length>0; else createCategory">
-                    <select  class="form-control" #categoryId="ngModel" name="categoryId" [(ngModel)]="this.product.categoryId"   (change)="onOptionsSelected(categoryId.value)">
-                        <option    *ngFor="let cat of this.categories" value="{{cat.id}}"  selected="{{cat.id==product.categoryId}}"  >{{cat.name}}</option>
-                    </select>
-                </div>
+  <div class="row">
+    <!-- Left: Form -->
+    <div class="col-md-8">
+      <form #formId="ngForm" (ngSubmit)="onSubmitProduct(formId.value)">
+        <h2>Create Product:</h2>
+        <br />
 
-                <ng-template #createCategory>
-                    <a id='btnCreateCategory' class="btn btn-primary" routerLink="/Category/Create">Create</a>
-                </ng-template>
-                
-                
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col col-md-auto">
+        <div class="row">
+          <div class="col col-md-auto">
             <div class="form-group">
-                <label class="form-label">Name</label>
-                <input class="form-control" #name="ngModel" name="name" type="text" [(ngModel)]="this.product.name"  >
-                <span *ngIf="this.product.name.length==0 && formId.touched" style="color:red;">Text  value should not be empty</span>
+              <label class="form-label">Id</label>
+              <input
+                class="form-control"
+                #id="ngModel"
+                name="id"
+                type="text"
+                [(ngModel)]="product.id"
+                disabled
+              />
             </div>
-        </div>
-        <div class="col col-md-auto">
+          </div>
+
+          <div class="col col-md-4">
             <div class="form-group">
-                <label class="form-label">Price</label>
-                <input class="form-control" #price="ngModel" [min]="0" name="price" type="number" [(ngModel)]="this.product.price"  >
-                <span *ngIf="this.price.value<0" style="color:red;">Min value should be higher than 0</span>
+              <label class="form-label">Category</label>
+              <div  >
+                <select
+                  class="form-control"
+                  #categoryId="ngModel"
+                  name="categoryId"
+                  [(ngModel)]="product.categoryId"
+                  (change)="onOptionsSelected(categoryId.value)"
+                >
+                  <option
+                    *ngFor="let cat of categories"
+                    [value]="cat.id"
+                  >
+                    {{ cat.name }}
+                  </option>
+                </select>
+              </div>
+              <ng-template #createCategory>
+                <a
+                  id="btnCreateCategory"
+                  class="btn btn-primary"
+                  routerLink="/Category/Create"
+                >
+                  Create
+                </a>
+              </ng-template>
             </div>
+          </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col col-md-auto">
+
+        <div class="row">
+          <div class="col col-md-auto">
             <div class="form-group">
-                <label class="form-label">Quantity</label>
-                <input class="form-control"  #quantity="ngModel" [min]="0" name="quantity" type="number" [(ngModel)]="this.product.quantity"  >
-              <span *ngIf="this.quantity.value<0" style="color:red;">Min value should be higher than 0</span>
+              <label class="form-label">Name</label>
+              <input
+                class="form-control"
+                #name="ngModel"
+                name="name"
+                type="text"
+                [(ngModel)]="product.name"
+              />
+              <span
+                *ngIf="product.name.length === 0 && formId.touched"
+                style="color: red"
+                >Text value should not be empty</span
+              >
             </div>
-        </div>
-        <div class="col col-md-auto">
+          </div>
+
+          <div class="col col-md-auto">
             <div class="form-group">
-                <label class="form-label">Enabled</label>
-                <input class="form-check-input" #enabled="ngModel" name="enabled" type="checkbox" [(ngModel)]="this.product.enabled"  checked>
+              <label class="form-label">Price</label>
+              <input
+                class="form-control"
+                #price="ngModel"
+                [min]="0"
+                name="price"
+                type="number"
+                [(ngModel)]="product.price"
+              />
+              <span
+                *ngIf="price.value < 0"
+                style="color: red"
+                >Min value should be higher than 0</span
+              >
             </div>
+          </div>
         </div>
-        
-    </div>
-    <div class="col col-md-auto">
-        <div class="form-group">
-            <button type="submit" [disabled]="formId.invalid" class="btn btn-success" >Save</button>
+
+        <div class="row">
+          <div class="col col-md-auto">
+            <div class="form-group">
+              <label class="form-label">Quantity</label>
+              <input
+                class="form-control"
+                #quantity="ngModel"
+                [min]="0"
+                name="quantity"
+                type="number"
+                [(ngModel)]="product.quantity"
+              />
+              <span
+                *ngIf="quantity.value < 0"
+                style="color: red"
+                >Min value should be higher than 0</span
+              >
+            </div>
+          </div>
+
+         
+
+          <div class="col col-sm-auto">
+            <div class="form-group">
+              <label class="form-label">Upload Images</label>
+              <input
+                type="file"
+                class="form-control"
+                (change)="onFilesSelected($event)"
+                multiple
+              />
+            </div>
+          </div>
+          <div class="col col-md-auto">
+            <div class="form-group">
+              <label class="form-label">Enabled</label>
+              <input
+                class="form-check-input"
+                #enabled="ngModel"
+                name="enabled"
+                type="checkbox"
+                [(ngModel)]="product.enabled"
+                checked
+              />
+            </div>
+          </div>
+            <div class="form-group mt-3">
+          <button
+            type="submit"
+            [disabled]="formId.invalid"
+            class="btn btn-success"
+          >
+            Save
+          </button>
         </div>
+        </div>
+
+      
+      </form>
     </div>
-    
-</form>
+ 
+    <div class="col-md-4">
+      <h5>Selected Images</h5>
+      <div *ngIf="selectedImages.length === 0">No images selected.</div>
+      <div *ngFor="let img of selectedImages" class="mb-2">
+        <img [src]="img.base64" class="img-thumbnail" style="max-width: 100px" />
+      </div>
+    </div>
+  </div>
 </div>

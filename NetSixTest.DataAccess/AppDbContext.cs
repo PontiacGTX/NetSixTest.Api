@@ -23,7 +23,7 @@ public class AppDbContext:DbContext
        
 
         modelBuilder.Entity<ProductPicture>().HasKey(x=>x.ProductPictureId);
-        modelBuilder.Entity<ProductPicture>().HasOne(x=>x.Product).WithMany(x=>x.Picture);
+        modelBuilder.Entity<ProductPicture>().HasOne(x=>x.Product).WithMany(x=>x.Pictures);
 
         base.OnModelCreating(modelBuilder);
     }

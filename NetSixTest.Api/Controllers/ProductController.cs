@@ -20,9 +20,10 @@ namespace NetSixTest.Api.Controllers
         private ProductPictureServices _productPictureServices;
         private readonly ILogger<ProductController> _logger;
 
-        public ProductController(ProductServices productoServices, ILogger<ProductController> logger)
+        public ProductController(ProductServices productoServices,ProductPictureServices productPictureServices, ILogger<ProductController> logger)
         {
             _productoServices = productoServices;
+            _productPictureServices = productPictureServices;
             _logger = logger;
         }
 
@@ -108,12 +109,21 @@ namespace NetSixTest.Api.Controllers
                     var product =_productoServices.GetProduct(producto);
                     return OkResponse(producto);
                 }
-                 var result =  await _productoServices.CreateProduct(new(producto));
 
-                    if(result!=null && producto.ProductPictures != null)
+                var result =  await _productoServices.CreateProduct(new(producto));
+                if(result!=null && producto.ProductPictures != null)
+                {
+                    producto.ProductPictures = producto.ProductPictures.Select(x =>
                     {
-                        await _productPictureServices.AddProductPicture(producto.ProductPictures);
-                    }
+                        return new InsertProductPictureModel
+                        {
+                            PictureData = x.PictureData,
+                            ProductId = result.Id,
+                            FileName = x.FileName
+                        };
+                    }).ToList();
+                    result.Pictures = await _productPictureServices.AddProductPicture(producto.ProductPictures);
+                }
 
                 return OkResponse(result);
             }

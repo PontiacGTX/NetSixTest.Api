@@ -23,7 +23,7 @@ namespace NetSixTest.DataAccess.Request
             }
             public async Task<Product> Handle(GetProductByIdQuery query, CancellationToken cancellationToken)
             {
-                return (await _ctx.Products.Where(a => a.Id == query.Id).Include(x=>x.Category).FirstOrDefaultAsync())!;
+                return (await _ctx.Products.Where(a => a.Id == query.Id).Include(x=>x.Category).Include(x=>x.Pictures).FirstOrDefaultAsync())!;
             }
         }
     }

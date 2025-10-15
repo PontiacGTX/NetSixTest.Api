@@ -20,13 +20,11 @@ namespace NetSixTest.Data.Models
 
     public class ProductInsertModel
     {
-        [JsonIgnore]
-        public int Id { get; set; }
         public string Name { get; set; }
         public double Price { get; set; }
         public int Quantity { get; set; }
         public bool Enabled { get; set; }
         public int CategoryId { get; set; }
-        public IList<ProductPicture>? ProductPictures { get; set; } = null;
+        public IList<InsertProductPictureModel>? ProductPictures { get; set; } = null;
     }
 }

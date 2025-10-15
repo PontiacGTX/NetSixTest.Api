@@ -18,7 +18,7 @@ namespace NetSixTest.DataAccess.Command
         {
             public async Task<ProductPicture?> Handle(AddProductPictureCommand request, CancellationToken cancellationToken)
             {
-                if (dbContext.Pictures.Any(x => x.Hash == request.Field.Hash))
+                if (dbContext.Pictures.Any(x => x.Hash == request.Field.Hash && x.ProductId == request.Field.ProductId))
                     return dbContext.Pictures.FirstOrDefault(x => x.Hash == request.Field.Hash);
 
                 request.Field.ProductPictureId = Guid.NewGuid();

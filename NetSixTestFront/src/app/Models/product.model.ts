@@ -1,11 +1,13 @@
 import { Category } from "./category.model";
+import { ProductPicture } from "./product-picture.model";
 export class Product {
 
-    id:Number=0;
-    price:Number=0.0;
-    quantity:Number=0;
-    enabled:Boolean=false;
-    name:String='';
-    categoryId:Number=0;
+    id:number=0;
+    price:number=0.0;
+    quantity:number=0;
+    enabled:boolean=false;
+    name:string='';
+    categoryId:number=0;
     category:Category=new Category();
+    productPictures:ProductPicture[];
 }
