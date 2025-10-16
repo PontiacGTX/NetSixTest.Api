@@ -2,7 +2,7 @@
 <ng-template 
 class="container" [ngIf]="this.router.url =='/Product'"  >
 <!-- [ngIfElse]="productDetails" -->
-<app-table [tableTitle]="'Product Table'" [entity]="'Product'"></app-table>
+<app-table [tableTitle]="'Products Table'" [entity]="'Product'"></app-table>
 </ng-template>
 
 <ng-template #productCreate [ngIf]="this.router.url == '/Product/Create'">
