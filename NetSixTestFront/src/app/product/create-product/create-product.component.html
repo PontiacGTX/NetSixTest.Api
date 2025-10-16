@@ -29,7 +29,8 @@
                   <label for="multiSelect" class="form-label">Categories</label>
                   <div ngbDropdown class="w-100">
                   <button ngbDropdownToggle class="btn btn-outline-primary dropdown-toggle w-100" type="button">
-                    {{ selectedCategories.length ? (categories | map:'name').join(', ') : 'Choose categories' }}
+                    {{ selectedCategories.length !== 0 ? (selectedCategories | joinNames:'name') : 'Choose categories' }}
+
                   </button>
                   <ul ngbDropdownMenu class="dropdown-menu w-100">
                     <li *ngFor="let option of categories" class="dropdown-item">

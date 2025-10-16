@@ -23,7 +23,7 @@ import { CategoryComponent } from './category/category.component';
 import { CreateCategoryComponent } from './category/create-category/create-category.component';
 import { CategoryItemComponent } from './category/category-item/category-item.component';
 import { CategoryTableComponent } from './category/category-table/category-table.component';
-import { MapPipe } from './Pipes/MapsPipe';
+import { JoinNamesPipe, MapPipe } from './Pipes/MapsPipe';
 
 // import { MatSortModule } from '@angular/material/sort';
 @NgModule({
@@ -52,7 +52,8 @@ import { MapPipe } from './Pipes/MapsPipe';
     CategoryTableComponent,
     CreateCategoryComponent,
     CategoryItemComponent,
-    MapPipe
+    MapPipe,
+    JoinNamesPipe
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -9,3 +9,11 @@ export class MapPipe implements PipeTransform {
     return value.map(item => item[property]);
   }
 }
+
+@Pipe({name: 'joinNames'})
+export class JoinNamesPipe implements PipeTransform {
+  transform(value: any[], key: string): string {
+    if (!value || value.length === 0) return '';
+    return value.map(item => item[key]).join(', ');
+  }
+}

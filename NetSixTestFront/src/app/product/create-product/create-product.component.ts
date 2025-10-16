@@ -169,6 +169,7 @@ export class CreateProductComponent implements OnInit {
     else
     {
         console.log(this.response);
+        console.log("res" +this.response);
         alert(this.response.validation.map((e:string)=>e).join(','));
     }
   }
