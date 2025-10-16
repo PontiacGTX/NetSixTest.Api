@@ -19,10 +19,11 @@ import { CreateProductComponent } from './product/create-product/create-product.
 import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CategoryComponent } from './category/category.component';
-import { CategoryTableComponent } from './Category/category-table/category-table.component';
+import { CategoryComponent } from './category/category.component'; 
 import { CreateCategoryComponent } from './category/create-category/create-category.component';
 import { CategoryItemComponent } from './category/category-item/category-item.component';
+import { CategoryTableComponent } from './category/category-table/category-table.component';
+import { MapPipe } from './Pipes/MapsPipe';
 
 // import { MatSortModule } from '@angular/material/sort';
 @NgModule({
@@ -50,8 +51,8 @@ import { CategoryItemComponent } from './category/category-item/category-item.co
     CategoryComponent,
     CategoryTableComponent,
     CreateCategoryComponent,
-    CategoryItemComponent
-    
+    CategoryItemComponent,
+    MapPipe
   ],
   providers: [],
   bootstrap: [AppComponent],

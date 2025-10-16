@@ -3,7 +3,7 @@
     <!-- Left: Form -->
     <div class="col-md-8">
       <form #formId="ngForm" (ngSubmit)="onSubmitProduct(formId.value)">
-        <h2>Create Product:</h2>
+        <h2> Product:</h2>
         <br />
 
         <div class="row">
@@ -20,10 +20,38 @@
               />
             </div>
           </div>
-
           <div class="col col-md-4">
+      
+
             <div class="form-group">
-              <label class="form-label">Category</label>
+              <div class="col col-md-auto">
+                <div class="mb-3">
+                  <label for="multiSelect" class="form-label">Categories</label>
+                  <div ngbDropdown class="w-100">
+                  <button ngbDropdownToggle class="btn btn-outline-primary dropdown-toggle w-100" type="button">
+                    {{ selectedCategories.length ? (categories | map:'name').join(', ') : 'Choose categories' }}
+                  </button>
+                  <ul ngbDropdownMenu class="dropdown-menu w-100">
+                    <li *ngFor="let option of categories" class="dropdown-item">
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          [id]="'category' + option.id"
+                          [value]="option.id"
+                          (change)="onOptionToggle(option, $event.target)"
+                          [checked]="selectedCategories.includes(option)"
+                        />
+                        <label class="form-check-label" [for]="'category' + option.id">{{ option.name }}</label>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+
+                </div>
+              </div>
+
+              <!-- <label class="form-label">Category</label>
               <div  >
                 <select
                   class="form-control"
@@ -39,7 +67,7 @@
                     {{ cat.name }}
                   </option>
                 </select>
-              </div>
+              </div> -->
               <ng-template #createCategory>
                 <a
                   id="btnCreateCategory"

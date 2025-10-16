@@ -18,12 +18,20 @@ namespace NetSixTest.Api.Controllers
     {
         private ProductServices _productoServices;
         private ProductPictureServices _productPictureServices;
+        private ProductCategoriesServices _productCategoriesServices;
+        private readonly CategoryService _categoryService;
         private readonly ILogger<ProductController> _logger;
 
-        public ProductController(ProductServices productoServices,ProductPictureServices productPictureServices, ILogger<ProductController> logger)
+        public ProductController(ProductServices productoServices,
+            ProductPictureServices productPictureServices,
+            ProductCategoriesServices productCategoriesServices,
+            CategoryService categoryService,
+            ILogger<ProductController> logger)
         {
             _productoServices = productoServices;
             _productPictureServices = productPictureServices;
+            _productCategoriesServices = productCategoriesServices;
+            _categoryService = categoryService;
             _logger = logger;
         }
 
@@ -110,20 +118,7 @@ namespace NetSixTest.Api.Controllers
                     return OkResponse(producto);
                 }
 
-                var result =  await _productoServices.CreateProduct(new(producto));
-                if(result!=null && producto.ProductPictures != null)
-                {
-                    producto.ProductPictures = producto.ProductPictures.Select(x =>
-                    {
-                        return new InsertProductPictureModel
-                        {
-                            PictureData = x.PictureData,
-                            ProductId = result.Id,
-                            FileName = x.FileName
-                        };
-                    }).ToList();
-                    result.Pictures = await _productPictureServices.AddProductPicture(producto.ProductPictures);
-                }
+                var result =  await _productoServices.CreateProduct(producto);
 
                 return OkResponse(result);
             }

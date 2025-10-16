@@ -19,8 +19,7 @@ public class Product : IEntity
     {
         this.Enabled = model.Enabled; 
         this.Name = model.Name;
-        this.Price = model.Price;
-        this.CategoryId = model.CategoryId;
+        this.Price = model.Price; 
         this.Quantity = model.Quantity;
         this.Id = model.Id;
     }
@@ -28,8 +27,7 @@ public class Product : IEntity
     {
         this.Enabled = model.Enabled; 
         this.Name = model.Name;
-        this.Price = model.Price;
-        this.CategoryId = model.CategoryId;
+        this.Price = model.Price; 
         this.Quantity = model.Quantity;
     }
     [Key]
@@ -38,8 +36,7 @@ public class Product : IEntity
     public string Name { get; set; }
     public double Price { get; set; }
     public int Quantity { get; set; }
-    public bool Enabled { get; set; }
-    public int CategoryId { get; set; }
-    public Category Category { get; set; }
+    public bool Enabled { get; set; } 
     public ICollection<ProductPicture>? Pictures { get; set; }
+    public ICollection<ProductsCategories>? ProductsCategories { get; set; }
 }

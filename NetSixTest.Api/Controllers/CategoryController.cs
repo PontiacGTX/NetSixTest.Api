@@ -16,12 +16,14 @@ namespace NetSixTest.Api.Controllers
         // GET: api/<CategoryController>
         private CategoryService _categoryServices;
         private ProductServices _productServices;
+        private ProductCategoriesServices _productCategoriesServices;
         private readonly ILogger<CategoryController> _logger;
 
-        public CategoryController(CategoryService categoryServices,ProductServices productServices, ILogger<CategoryController> logger)
+        public CategoryController(CategoryService categoryServices,ProductServices productServices,ProductCategoriesServices productCategoriesServices, ILogger<CategoryController> logger)
         {
             _categoryServices = categoryServices;
             _productServices = productServices;
+            _productCategoriesServices = productCategoriesServices;
             _logger = logger;
         }
 
@@ -137,12 +139,13 @@ namespace NetSixTest.Api.Controllers
 
                 try
                 {
-                    foreach (var product in await _productServices.GetAll(x => x.CategoryId == id))
+                    foreach (var product in await _productCategoriesServices.GetAll(x => x.CategoryId == id))
                     {
                         try
                         {
-                            product.Enabled = false;
-                            await _productServices.UpdateProduct(product);
+                            var prod = product.Product;
+                            prod.Enabled = false;
+                            await _productServices.UpdateProduct(prod);
                         }
                         catch (Exception ex)
                         {

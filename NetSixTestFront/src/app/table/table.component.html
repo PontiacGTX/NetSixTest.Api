@@ -2,13 +2,13 @@
 
 <div class="container">
     <a id='btnCreate' class="btn btn-primary" routerLink="/{{entity}}/Create">Create</a>
-    <h3>{{tableTitle}}</h3>
+    <h3 style="font-weight: 900;">{{tableTitle}}</h3>
 
     
 <table class="table table-striped table-bordered table-responsive">
     <thead>
         <tr>
-            <th scope="col" (click)="sortData('categoryName')">categoryName <span *ngIf="sortedColumn === 'categoryName'">{{sortDirection === 'asc' ? '▲' : '▼'}}</span></th>
+            <th scope="col" (click)="sortData('categoriesCount')">Category Count <span *ngIf="sortedColumn === 'categoriesCount'">{{sortDirection === 'asc' ? '▲' : '▼'}}</span></th>
             <th scope="col" (click)="sortData('enabled')">enabled <span *ngIf="sortedColumn === 'enabled'">{{sortDirection === 'asc' ? '▲' : '▼'}}</span></th>
             <th scope="col" (click)="sortData('id')">id <span *ngIf="sortedColumn === 'id'">{{sortDirection === 'asc' ? '▲' : '▼'}}</span></th>
             <th scope="col" (click)="sortData('price')">price <span *ngIf="sortedColumn === 'price'">{{sortDirection === 'asc' ? '▲' : '▼'}}</span></th>
@@ -19,7 +19,7 @@
     </thead>
     <tbody>
         <tr *ngFor="let element of dataSource">
-            <td>{{element.categoryName}}</td>
+            <td>{{element.categoriesCount}}</td>
             <td>{{element.enabled}}</td>
             <td>{{element.id}}</td>
             <td>{{element.price}}</td>

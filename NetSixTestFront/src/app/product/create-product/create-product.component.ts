@@ -11,6 +11,9 @@ import { CdkRecycleRows } from '@angular/cdk/table';
 import { ProductPicture } from 'src/app/Models/product-picture.model';
 import { InsertProductPicture } from 'src/app/Models/insert-product-picture.model';
 import { InsertProduct } from 'src/app/Models/insert-product.model';
+import { ProductCategory } from 'src/app/Models/product-category.model';
+import { ProductsCategories } from 'src/app/Models/products-categories.model';
+import { map, Observable } from 'rxjs';
 
 export class FileItem {
   base64:string;
@@ -30,21 +33,27 @@ export class CreateProductComponent implements OnInit {
   public categories:Category[];
   constructor(public categoryDataService:CategoryDataService, public productDataService:ProductDataService,public route:Router,
     public activatedRoute:ActivatedRoute ) {
-    this.product.enabled=true;
-    this.product.categoryId = 1;
+    this.product.enabled=true; 
    
    
   }
-  onOptionsSelected(value:any|null){
-
-    this.product.categoryId = (value as number);
-  }
-  
+ 
   canRedirect:Boolean=false;
   response:any;
   public selectedImages: FileItem[] = [];
 
+   categoriesOptions :Category[] ;
+   selectedCategories :Category[]=[];
  
+  onOptionToggle(option: Category, el: any): void {
+  let element = el as HTMLInputElement;
+  if (element.checked) {
+    if (!this.selectedCategories.includes(option))
+      this.selectedCategories.push(option);
+  } else {
+    this.selectedCategories = this.selectedCategories.filter(o => o !== option);
+  }
+}
   onFilesSelected(event: Event): void {
     const input = event.target as HTMLInputElement; 
     const files = input.files;
@@ -91,7 +100,7 @@ export class CreateProductComponent implements OnInit {
 
   onSubmitProduct(prod:Product){
     console.log(prod);
-   if(this.product.categoryId==0)
+   if(this.selectedCategories.length==0)
    {
     alert('this products needs a valid category, please create one');
     return;
@@ -103,15 +112,19 @@ export class CreateProductComponent implements OnInit {
       insertProduct.productPictures =this.selectedImages.map((file, index) =>
                                                          {  
                                                               const base64 = file.base64;
-                                                              console.log(base64)
-                                                              //const byteArray = this.base64ToByteArray(base64); 
+                                                              console.log(base64) 
                                                               const pic: InsertProductPicture = {
                                                                 fileName: file.name,
                                                                 pictureData: base64.split(',')[1]
                                                               };
                                                                   return pic;
                                                         });
-      insertProduct.categoryId = prod.categoryId;
+      insertProduct.productsCategories = this.selectedCategories.map(pc=> {
+                                                                        return {
+                                                                          productId:0,
+                                                                          categoryId:pc.id
+                                                                        }
+                                                                    })    
       insertProduct.enabled = prod.enabled;
       insertProduct.name = prod.name;
       insertProduct.price =prod.price;    
@@ -129,6 +142,12 @@ export class CreateProductComponent implements OnInit {
           });
     break;
     case CRUDOpEnum.UPDATE:
+         this.product.productsCategories = this.selectedCategories.map(pc=> {
+                                                                        let p:ProductsCategories= new ProductsCategories();
+                                                                        p.categoryId = pc.id;
+                                                                        p.productId =this.product.id 
+                                                                        return p;
+                                                                    })    
       this.productDataService.updateProduct(this.product).subscribe((r:any )=>{
         if((r as Response).statusCode==200)
         {
@@ -154,12 +173,14 @@ export class CreateProductComponent implements OnInit {
     }
   }
 
-  getCategories(){
-    return  this.categoryDataService.getCategories().subscribe((r:Response)=>
-    {
-       
-        this.categories = (r.data as Category[]).filter(c=>c.enabled || c.id == this.product.categoryId);
-    })
+  getCategories():Observable<Category[]>{
+    return   this.categoryDataService.getCategories().pipe(
+                                                            map((r: Response) => {
+                                                                    this.categories =r.data as Category[]
+                                                                this.categoriesOptions =this.categories;
+                                                                    return this.categories;
+                                                                })
+                                                          );
   }
 
   ngOnInit(): void {
@@ -168,16 +189,21 @@ export class CreateProductComponent implements OnInit {
     {
         this.productDataService.getProduct(this.activatedRoute.snapshot.paramMap.get('id'))
         .subscribe((r:Response)=>{
-          this.product  = r.data as Product;
-          console.log(this.product)
-          this.getCategories();
-        });
+          this.product  = r.data as Product; 
+          this.getCategories().subscribe(cats=>{
+               if(this.product.productsCategories!=null)
+                  this.selectedCategories = this.categories.filter(cat=> this.product.productsCategories.some(pc => pc.categoryId === cat.id))
+                  console.log( this.selectedCategories)
+               });
+          })
+         
     }
     else
-    {
-      this.product.categoryId=0;
-      this.getCategories();
-      this.product.categoryId=this.categories!=null && this.categories.length>0 ? this.categories[0].id:0;
+    { 
+      this.getCategories().subscribe(cats=>{
+            this.categories=cats;
+      }); 
+     
     }
   }
 

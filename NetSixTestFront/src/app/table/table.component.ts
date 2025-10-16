@@ -49,7 +49,7 @@ export class TableComponent implements OnInit {
     [ 
       
       'id',
-      'categoryName',
+      'categoriesCount',
       'name',
       'quantity',
       'price',
@@ -61,7 +61,7 @@ export class TableComponent implements OnInit {
       this.products =   (d.data as Product[])
                         .map((p:Product)=>  ({
                         'id' : p.id,
-                        'categoryName':p.category.name,
+                        'categoriesCount':p.productsCategories.length,
                         'enabled':p.enabled,
                         'price':p.price,
                         'quantity':p.quantity,
@@ -100,7 +100,7 @@ export class TableComponent implements OnInit {
             case 'price':
               return  this.compare(elA.price,elB.price,isAsc);
             case 'categoryName':
-              return  this.compare(elA.categoryName,elB.categoryName,isAsc);
+              return  this.compare(elA.categoriesCount,elB.categoriesCount,isAsc);
             default:
                return 0;
           }

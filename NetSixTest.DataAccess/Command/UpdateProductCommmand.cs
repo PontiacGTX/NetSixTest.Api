@@ -31,8 +31,7 @@ namespace NetSixTest.DataAccess.Command
                 producto.Price = command.Field.Price;
                 producto.Name = command.Field.Name;
                 producto.Enabled = command.Field.Enabled;
-                producto.Quantity = command.Field.Quantity;
-                producto.CategoryId = command.Field.CategoryId;
+                producto.Quantity = command.Field.Quantity; 
                 await _ctx.SaveChangesAsync();
                 return (await _ctx.Products.FirstOrDefaultAsync(x => x.Id == producto.Id))!;
             }

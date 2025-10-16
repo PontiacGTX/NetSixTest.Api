@@ -4,6 +4,6 @@ export class ProductViewModel {
     quantity:number=0;
     enabled:boolean=false;
     name:string='';
-    categoryName:string='';
+    categoriesCount:number=0;
     productIdUrl:string='';
 }

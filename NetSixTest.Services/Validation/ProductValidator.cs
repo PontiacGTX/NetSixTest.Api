@@ -26,7 +26,7 @@ namespace NetSixTest.Services.Validation
             RuleFor(product => product.Quantity).InclusiveBetween(0, int.MaxValue).WithErrorCode("Quantity must be higher or equal to 0");
 
             
-            RuleFor(product => product.CategoryId).Must(ExistCategory).WithMessage("Category Id does not exist");
+           // RuleFor(product => product.).Must(ExistCategory).WithMessage("Category Id does not exist");
         }
 
         bool ExistCategory(int categoryId) =>

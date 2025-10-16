@@ -24,7 +24,17 @@ namespace NetSixTest.DataAccess.Request
             public async Task<IList<Product>> Handle(ProductListRequest request, CancellationToken cancellationToken)
             {
                 
-                var productos = await _ctx.Products.Include(x=>x.Category).Select(x=>x).ToListAsync();
+                var productos = await _ctx.Products.Include(x=>x.ProductsCategories).Select(p => new Product
+                {
+                    Enabled = p.Enabled,
+                    Id = p.Id,
+                    Name = p.Name,
+                    Pictures = p.Pictures,
+                    Price = p.Price,
+                    ProductsCategories = p.ProductsCategories.Select(pc => new ProductsCategories { Id = pc.Id, CategoryId = pc.CategoryId, ProductId = pc.ProductId }).ToList(),
+                    Quantity = p.Quantity
+
+                }).ToListAsync();
                 return productos;
             }
         }

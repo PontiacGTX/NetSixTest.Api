@@ -17,7 +17,16 @@ export class ItemComponent implements OnInit {
    }
 
 
- 
+ public getCategoryNames(): string {
+    if (!this.product || !this.product.productsCategories) {
+      return '';
+    }
+    
+    // Perform the logic here in TypeScript
+    return this.product.productsCategories
+      .map(pc => pc.category.name)
+      .join(', ');
+  }
 
   byteArrayToBase64(pic: ProductPicture): string {
     // 1. Get the MIME type based on the file extension
